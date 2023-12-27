@@ -1,8 +1,10 @@
 package net.base.open;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@MapperScan("net.base.open.mapper")
 @SpringBootApplication
 public class OpenApplication {
 

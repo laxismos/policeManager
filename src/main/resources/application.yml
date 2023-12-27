@@ -1,6 +1,6 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/policeMan?serverTimeZone=UTC
+        url: jdbc:mysql://localhost:3306/software_design?serverTimeZone=UTC
         username: root
         password: Zxt6830i###
         driver-class-name: com.mysql.cj.jdbc.Driver
