@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.base.open.mapper.CaseMapper">
+    <resultMap id="case" type="net.base.open.entity.Case">
+        <constructor>
+            <idArg javaType="String"/>
+        </constructor>
+        <result property="Cinfo" column="Cinfomation"/>
+    </resultMap>
+
+    <!-- addCase --> 
+
+    <insert id="addCase">
+        INSERT INTO CASES
+        (Cname,Cdate,Cinformation,Cresult,Cno)
+        VALUES
+        (#{Cname},#{Cdate},#{Cinfo},#{Cresult},#{Cno})
+    </insert>
+
+    <!-- getCases --> 
+
+    <select id="getCases" resultMap="case">
+        SELECT * FROM CASES
+        <where>
+            <if test="Cname != null">
+                Cname = #{Cname}
+            </if>
+            <if test="Cresult != null">
+                AND Cresult = #{Cresult}
+            </if>
+            <if test="Cno != null">
+                AND Cno = #{Cno}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+    
+</mapper>
