@@ -5,7 +5,7 @@
 <mapper namespace="net.base.open.mapper.CaseMapper">
     <resultMap id="case" type="net.base.open.entity.Case">
         <constructor>
-            <idArg javaType="String"/>
+            <idArg column="Cno" javaType="String"/>
         </constructor>
         <result property="Cinfo" column="Cinfomation"/>
     </resultMap>
@@ -37,4 +37,40 @@
         LIMIT #{offset},#{limit}
     </select>
     
+
+    <!-- updateCase --> 
+
+    <update id="updateCase">
+        UPDATE CASES
+        <set>
+            <if test="Cinfo != null">
+                Cinfomation = #{Cinfo},
+            </if>
+            <if test="Cresult != null">
+                Cresult = #{Cresult}
+            </if>
+        </set>
+        <where>
+            <if test="Cno != null">
+                Cno = #{Cno}
+            </if>
+            <if test="Cname != null">
+                OR Cname = #{Cname}
+            </if>
+        </where>
+    </update>    
+
+    <!-- deleteCase --> 
+
+    <delete id="deleteCase">
+        DELETE FROM CASES
+        <where>
+            <if test="Cno != null">
+                Cno = #{Cno}
+            </if>
+            <if test="Cname != null">
+                AND Cname = #{Cname}
+            </if>
+        </where>
+    </delete>
 </mapper>

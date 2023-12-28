@@ -1,0 +1,21 @@
+<configuration debug="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>./log/log.log</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+        <maxFileSize>80MB</maxFileSize>
+        <maxHistory>14</maxHistory>
+        <totalSizeCap>2GB</totalSizeCap>
+        <minIndex>1</minIndex>
+        <maxIndex>3</maxIndex>
+      </rollingPolicy>
+      <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%kvp- %msg%n</pattern>
+      </encoder>
+    </appender>
+  
+    <root level="info">
+      <appender-ref ref="STDOUT" />
+    </root>
+  </configuration>
