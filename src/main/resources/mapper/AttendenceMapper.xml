@@ -36,7 +36,7 @@
         UPDATE ATTENDENCES SET Ainfo = #{Ainfo}
         <where>
             <if test="Adate != null">
-                Adate = #{Adate}
+                Adate = #{Adate},
             </if>
             <if test="Aname != null">
                 AND Aname = #{Aname}

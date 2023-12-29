@@ -1,0 +1,62 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.base.open.mapper.SuspectMapper">
+    <resultMap id="suspect" type="net.base.open.entity.Suspect">
+        <constructor>
+            <idArg javaType="String" column="Sno"/>
+        </constructor>
+    </resultMap>
+
+    <insert id="addSuspect">
+        INSERT INTO SUSPECTS
+        (Sno,Sname,Sreason,Stime,Status)
+        VALUES
+        (#{Sno},#{Sname},#{Sreason},#{Stime},#{Status})
+    </insert>
+
+    <select id="getSuspects" resultMap="suspect">
+        SELECT * FROM SUSPECTS
+        <where>
+            <if test="Sno != null">
+                Sno = #{Sno}
+            </if>
+            <if test="Sname != null">
+                AND Sname = #{Sname}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+    
+    <update id="updateSuspect">
+        UPDATE SUSPECTS 
+        <set>
+            <if test="Sname != null">
+                Sname = #{Sname}
+            </if>
+            <if test="Sreason != null">
+                Sreason = #{Sreason},
+            </if>
+            <if test="Stime != null">
+                Stime = #{Stime},
+            </if>
+            <if test="Status >= 0">
+                Status = #{Status}
+            </if>
+        </set>
+        WHERE Sno = #{Sno}
+    </update>
+
+    <delete id="deleteSuspect">
+        DELETE FROM SUSPECTS
+        <where>
+            <if test="Sno != null">
+                Sno = #{Sno}
+            </if>
+            <if test="Sname != null">
+                OR Sname = #{Sname}
+            </if>
+        </where>
+    </delete>
+</mapper>

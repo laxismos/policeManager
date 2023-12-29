@@ -4,6 +4,56 @@
 
 <mapper namespace="net.base.open.mapper.ResourceMapper">
     <resultMap id="resource" type="net.base.open.entity.Resource">
-        
+        <constructor>
+            <idArg javaType="String" column="Rno"/>
+        </constructor>
     </resultMap>
+
+    <insert id="addResource">
+        INSERT INTO RESOURCES 
+        (Rno,Rname,Rnum,Rindate,Ruse)
+        VALUES
+        (#{Rno},#{Rname},#{Rnum},#{Rindate},#{Ruse})
+    </insert>
+
+    <select id="getResource" resultMap="rsource">
+        SELECT * FROM RESOURCES 
+        <where>
+            <if test="Rno != null">
+                Rno = #{Rno}
+            </if>
+            <if test="Rname != null">
+                AND Rname = #{Rname}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+
+    <!-- updateResource --> 
+
+    <update id="updateResource">
+        UPDATE RESOURCES SET Rnum=#{Rnum}
+        <where>
+            <if test="Rname != null">
+                Rname = #{Rname},
+            </if>
+            <if test="Rname != null">
+                AND Rname = #{Rname}
+            </if>
+        </where>
+    </update>
+
+    <!-- deleteResource --> 
+
+    <delete id="deleteResource">
+        DELETE FROM RESOURCES
+        <where>
+            <if test="Rno != null">
+                Rno = #{Rno}
+            </if>
+            <if test="Rname != null">
+                OR Rname = #{Rname}
+            </if>
+        </where>
+    </delete>
 </mapper>
